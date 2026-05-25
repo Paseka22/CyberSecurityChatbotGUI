@@ -33,7 +33,7 @@ namespace CyberSecurityChatbotGUI
                     {
                         "Be careful of suspicious emails asking for personal information.",
                         "Phishing attacks often pretend to come from trusted companies.",
-                        "Avoid clicking links from unknown senders."
+                        "Avoid clicking links from unknown senders especially in websites."
                     }
                 },
 
