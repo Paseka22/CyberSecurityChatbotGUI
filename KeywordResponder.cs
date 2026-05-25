@@ -20,7 +20,7 @@ namespace CyberSecurityChatbotGUI
                     //Password saftey responses
                     "password",new List<string>
                     {
-                        "Make your passwords difficult to guess by adding symbols and numbers.",
+                        "Make your passwords difficult to guess by adding symbols and numbers mixed with letters.",
                         "Never use personal details like your birthday in a password.",
                         "Changing passwords often improves your online security."
                     }
