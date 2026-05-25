@@ -40,7 +40,7 @@ namespace CyberSecurityChatbotGUI
             if (waitingForName)
             {
                 waitingForName = false;
-                return "Nice to meet you, " + userMessage.Trim() + "! How can I assist you with cybersecurity today?";
+                return "Nice to meet you, " + userMessage.Trim() + "! How may I assist you with cybersecurity today?";
 
             }
             // Prevent null problems
