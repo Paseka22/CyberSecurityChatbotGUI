@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Cyber Security Chatbot"
         Height="600"
-        Width="900"
+        Width="1014"
         Background="#0D1B2A">
 
     <Grid Margin="10">
