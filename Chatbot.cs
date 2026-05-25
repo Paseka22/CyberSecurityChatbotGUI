@@ -23,7 +23,7 @@ namespace CyberSecurityChatbotGUI
             moodDetector = new SentimentDetector();
             memorySystem = new MemoryStore();
 
-            // Chatbot starts by asking for the user's name
+            // Chatbot starts by asking for the user's name first
             waitingForName = true;
         }
 
