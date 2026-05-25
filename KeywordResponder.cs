@@ -55,7 +55,7 @@ namespace CyberSecurityChatbotGUI
                     {
                         "Malware can damage your computer and steal information.",
                         "Install trusted antivirus software for extra protection.",
-                        "Avoid downloading files from suspicious websites."
+                        "Avoid downloading files from suspicious websites hackers usually find their victims there."
                     }
                 },
 
