@@ -3,11 +3,15 @@
 namespace CyberSecurityChatbotGUI
 {
     public class Chatbot
+
     {
         // Class objects
         private KeywordResponder keywordBot;
         private SentimentDetector moodDetector;
         private MemoryStore memorySystem;
+
+        // Creates an object to manage all user tasks
+        private TaskManager taskManager = new TaskManager();
 
         // Stores previous topic for follow-up responses
         private string lastTopic;
@@ -49,8 +53,77 @@ namespace CyberSecurityChatbotGUI
                 return "Please type a message first.";
             }
 
+
+
             // Convert input to lowercase
             string cleanMessage = userMessage.ToLower();
+
+            // Check if the user wants to add a task
+            if (cleanMessage.ToLower().StartsWith("add task "))
+            {
+                // Get the task description after "add task"
+                string taskDescription = cleanMessage.Substring(9);
+
+                // Create a new task
+                CyberTask task = new CyberTask
+                {
+                    Description = taskDescription,
+                    IsCompleted = false
+                };
+
+                // Save the task
+                taskManager.AddTask(task);
+
+                // Return a confirmation message
+                return "Task added successfully!";
+            }
+
+            // Check if the user wants to view all tasks
+            if (cleanMessage == "view tasks")
+            {
+                // Get all saved tasks
+                List<CyberTask> tasks = taskManager.GetAllTasks();
+
+                // Check if there are no tasks
+                if (tasks.Count == 0)
+                {
+                    return "You have no saved tasks.";
+                }
+
+                // Create a string to display all tasks
+                string result = "Your Tasks:\n";
+
+                // Loop through each task
+                for (int i = 0; i < tasks.Count; i++)
+                {
+                    string status = tasks[i].IsCompleted ? "Done" : "Not Done";
+
+                    result += $"{i + 1}. [{status}] {tasks[i].Description}\n";
+                }
+
+                // Return the completed task list
+                return result;
+            }
+
+            // Check if the user wants to delete a task
+            if (cleanMessage.StartsWith("delete task "))
+            {
+                // Get the task number entered by the user
+                string taskNumber = userMessage.Substring(12);
+
+                // Convert it into an integer
+                if (int.TryParse(taskNumber, out int index))
+                {
+                    // Delete the selected task
+                    taskManager.DeleteTask(index - 1);
+
+                    // Return a confirmation message
+                    return "Task deleted successfully!";
+                }
+
+                // Return an error if the task number is invalid
+                return "Please enter a valid task number.";
+            }
 
 
             // Follow-up handling
@@ -101,6 +174,13 @@ namespace CyberSecurityChatbotGUI
                 lastTopic = "online scams";
             }
 
+            // Show recent activity log
+            if (cleanMessage.Contains("activity") ||
+                cleanMessage.Contains("log") ||
+                cleanMessage.Contains("history"))
+            {
+                return ActivityLogger.GetRecentLog();
+            }
             // Generate personalised memory response
             string memoryReply = memorySystem.BuildPersonalisedReply();
 

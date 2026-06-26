@@ -45,6 +45,15 @@ namespace CyberSecurityChatbotGUI
         {
             string userMessage = UserInputBox.Text;
 
+            // Launch the quiz when the user requests it
+            if (userMessage.ToLower().Contains("start quiz") ||
+                userMessage.ToLower().Contains("quiz"))
+            {
+                QuizWindow quizWindow = new QuizWindow();
+                quizWindow.ShowDialog();
+                return;
+            }
+
             // Prevent empty messages
             if (string.IsNullOrWhiteSpace(userMessage))
             {
@@ -56,6 +65,9 @@ namespace CyberSecurityChatbotGUI
 
             // Get bot reply
             string botReply = securityBot.ProcessInput(userMessage);
+
+            ActivityLogger.Log("User: " + userMessage);
+            ActivityLogger.Log("Bot: " + botReply);
 
             // Show bot response
             ChatHistory.Text += $"\nBOT: {botReply}";
